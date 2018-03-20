@@ -9,6 +9,7 @@ var VideoListEntryView = Backbone.View.extend({
   },
 
   handleClick: function(e) {
+    var field = $(e.target.id);
     this.model.select();
   },
 
@@ -23,7 +24,7 @@ var VideoListEntryView = Backbone.View.extend({
                             <img class="media-object" src= <%- snippet.thumbnails.default.url %> />\
                           </div> \
                           <div class="media-body"> \
-                            <div class="video-list-entry-title"><%- snippet.title %></div> \
+                            <div class="video-list-entry-title" id="<%- id %>"><%- snippet.title %></div> \
                             <div class="video-list-entry-detail"><%- snippet.description %></div> \
                           </div>\
                         </div> ')
