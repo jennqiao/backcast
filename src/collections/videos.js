@@ -21,8 +21,8 @@ var Videos = Backbone.Collection.extend({
       dataType: 'json',
       success: function (data) {
         console.log('success!', data);
-        context.parse(data);
-      
+        var parsedData = context.parse(data);
+        context.trigger('update', parsedData);
       }, 
       error: function (data) {
         console.log('failed!', data);

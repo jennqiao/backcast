@@ -3,12 +3,25 @@ var AppView = Backbone.View.extend({
   el: '#app',
 
   initialize: function() {
-   
-    this.render();
-
+    
     this.videos = new Videos(exampleVideoData);
     this.videos.search('coding');
+
+    this.render();
+
+    this.videos.on('update', function(parsedData) {
+      console.log('heard the sync!');
+      
+      this.videos.reset(parsedData);
+      this.render();
+    }, this);
     
+  },
+
+
+  render: function() {
+    this.$el.html(this.template());
+
     this.videoListView = new VideoListView({collection: this.videos});
     this.videoListView.render();
 
@@ -18,11 +31,6 @@ var AppView = Backbone.View.extend({
     this.searchView = new SearchView({collection: this.videos});
     this.searchView.render();
 
-  },
-
-
-  render: function() {
-    this.$el.html(this.template());
     return this;
   },
 
